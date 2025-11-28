@@ -169,6 +169,15 @@ body {
     animation: logoFloat 6s ease-in-out infinite;
 }
 
+.logo-image {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(99, 102, 241, 0.35));
+    animation: logoFloat 6s ease-in-out infinite;
+}
+
 @keyframes logoFloat {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-8px) rotate(2deg); }

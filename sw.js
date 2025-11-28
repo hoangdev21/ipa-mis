@@ -1,10 +1,11 @@
-const CACHE_NAME = 'ipa-master-v2';
+const CACHE_NAME = 'ipa-mis-v3';
 const urlsToCache = [
     './',
     './index.html',
     './style.css',
     './script.js',
-    './manifest.json'
+    './manifest.json',
+    './icons/logo.png'
 ];
 
 // Install event
