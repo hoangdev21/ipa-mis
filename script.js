@@ -1,3 +1,75 @@
+// ============================================
+// Notification System
+// ============================================
+const NotificationManager = {
+    container: null,
+    
+    init() {
+        // Tạo container nếu chưa tồn tại
+        if (!this.container) {
+            this.container = document.createElement('div');
+            this.container.id = 'notification-container';
+            this.container.className = 'notification-container';
+            document.body.appendChild(this.container);
+        }
+    },
+    
+    show(message, type = 'info', duration = 4000) {
+        this.init();
+        
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <div class="notification-icon">
+                    ${this.getIcon(type)}
+                </div>
+                <div class="notification-text">
+                    <p class="notification-message">${message}</p>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.parentElement.remove()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="notification-progress"></div>
+        `;
+        
+        this.container.appendChild(notification);
+        
+        // Trigger animation
+        setTimeout(() => notification.classList.add('show'), 10);
+        
+        // Auto remove
+        if (duration > 0) {
+            const progressBar = notification.querySelector('.notification-progress');
+            progressBar.style.animation = `progress ${duration}ms linear`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, duration);
+        }
+    },
+    
+    getIcon(type) {
+        const icons = {
+            success: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>',
+            error: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+            warning: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05l-8.47-14.14a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+            info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+        };
+        return icons[type] || icons.info;
+    },
+    
+    success(message, duration = 3000) { this.show(message, 'success', duration); },
+    error(message, duration = 5000) { this.show(message, 'error', duration); },
+    warning(message, duration = 4000) { this.show(message, 'warning', duration); },
+    info(message, duration = 3000) { this.show(message, 'info', duration); }
+};
+
 // Bộ từ điển custom IPA cho các từ có phiên âm sai từ API
 const customIPADict = {
     'black': '/blæk/',
@@ -101,14 +173,14 @@ async function processWords() {
     const input = document.getElementById('wordInput').value.trim();
     
     if (!input) {
-        alert('Vui lòng nhập ít nhất một từ!');
+        NotificationManager.warning('Vui lòng nhập ít nhất một từ!');
         return;
     }
 
     const words = input.split('\n').map(w => w.trim()).filter(w => w);
     
     if (words.length === 0) {
-        alert('Không tìm thấy từ hợp lệ!');
+        NotificationManager.warning('Không tìm thấy từ hợp lệ!');
         return;
     }
 
@@ -390,7 +462,7 @@ function findBestVoice(lang) {
 
 function speak(word, lang) {
     if (!('speechSynthesis' in window)) {
-        alert('Trình duyệt không hỗ trợ phát âm!');
+        NotificationManager.error('Trình duyệt không hỗ trợ phát âm!');
         return;
     }
     
