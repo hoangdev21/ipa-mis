@@ -1,7 +1,7 @@
-const CACHE_NAME = 'ipa-master-v1';
+const CACHE_NAME = 'ipa-master-v2';
 const urlsToCache = [
     './',
-    './indexx.html',
+    './index.html',
     './style.css',
     './script.js',
     './manifest.json'
