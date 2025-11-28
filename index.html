@@ -80,7 +80,7 @@
                     <textarea 
                         id="wordInput" 
                         class="modern-textarea"
-                        placeholder="Nhập từ vựng cần phân tích...&#10;&#10;Ví dụ:&#10;sheep&#10;meal&#10;marine&#10;cheap&#10;three"
+                        placeholder="Nhập từ vựng cần phân tích...&#10;Ví dụ:&#10;sheep&#10;meal&#10;marine"
                     ></textarea>
                     <div class="textarea-glow"></div>
                 </div>
@@ -156,6 +156,13 @@
         <span>Cài đặt ứng dụng</span>
     </button>
 
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top-btn" aria-label="Lên đầu trang">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
     <script src="script.js"></script>
     <script>
         // Register Service Worker for PWA
@@ -189,6 +196,24 @@
         window.addEventListener('appinstalled', () => {
             installBtn.style.display = 'none';
             deferredPrompt = null;
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     </script>
 </body>

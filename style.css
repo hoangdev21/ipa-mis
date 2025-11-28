@@ -928,3 +928,65 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, var(--primary-400), var(--primary-500));
 }
+
+/* Back to Top Button */
+.back-to-top-btn {
+    position: fixed;
+    bottom: var(--space-xl);
+    right: var(--space-xl);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-500), var(--accent-purple));
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 
+        0 4px 20px rgba(99, 102, 241, 0.4),
+        0 0 0 4px rgba(99, 102, 241, 0.1);
+    transition: all var(--transition-base);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.8);
+}
+
+.back-to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.back-to-top-btn:hover {
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 
+        0 8px 30px rgba(99, 102, 241, 0.5),
+        0 0 0 6px rgba(99, 102, 241, 0.15);
+    background: linear-gradient(135deg, var(--primary-600), var(--accent-pink));
+}
+
+.back-to-top-btn:active {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.back-to-top-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 640px) {
+    .back-to-top-btn {
+        bottom: var(--space-lg);
+        right: var(--space-md);
+        width: 44px;
+        height: 44px;
+    }
+    
+    .back-to-top-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
