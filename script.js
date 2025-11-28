@@ -430,13 +430,12 @@ function speak(word, lang) {
 function clearResults() {
             document.getElementById('wordInput').value = '';
             document.getElementById('resultsSection').innerHTML = `
-                <div class="empty-state">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 6.5c2.76 0 5 2.24 5 5 0 .5-.08.97-.22 1.42l3.58 3.58c1.47-1.35 2.64-3.05 3.39-5-1.5-3.87-5.4-6.5-9.75-6.5-1.31 0-2.56.26-3.72.72l2.64 2.64c.45-.14.92-.22 1.42-.22z"/>
-                        <path d="M2.71 3.16a.996.996 0 0 0 0 1.41l1.97 1.97A11.892 11.892 0 0 0 1.5 11.5c1.5 3.87 5.4 6.5 9.75 6.5 1.55 0 3.03-.32 4.38-.9l.88.88c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L4.13 3.16c-.39-.39-1.03-.39-1.42 0zM12 16.5c-2.76 0-5-2.24-5-5 0-.77.18-1.5.49-2.14l1.57 1.57c-.03.18-.06.37-.06.57 0 1.66 1.34 3 3 3 .2 0 .38-.03.57-.07L14.14 16c-.64.31-1.37.5-2.14.5z"/>
-                    </svg>
+                <div class="empty-state glass-card">
+                    <div class="empty-icon">
+                        <img src="icons/hidden.png" alt="No Results Icon">
+                    </div>
                     <h3>Chưa có kết quả</h3>
-                    <p>Nhập từ vựng bên trên và nhấn "Phân tích" để bắt đầu</p>
+                    <p>Nhập từ vựng và nhấn "Phân tích" để bắt đầu</p>
                 </div>
             `;
         }

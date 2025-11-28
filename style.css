@@ -163,24 +163,24 @@ body {
 }
 
 .logo-icon {
-    width: 72px;
-    height: 72px;
-    filter: drop-shadow(0 8px 24px rgba(99, 102, 241, 0.35));
+    width: 56px;
+    height: 56px;
+    filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.25));
     animation: logoFloat 6s ease-in-out infinite;
 }
 
 .logo-image {
-    width: 72px;
-    height: 72px;
-    border-radius: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
     object-fit: contain;
-    filter: drop-shadow(0 8px 24px rgba(99, 102, 241, 0.35));
+    filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.25));
     animation: logoFloat 6s ease-in-out infinite;
 }
 
 @keyframes logoFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(2deg); }
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-6px) rotate(1deg) scale(1.02); }
 }
 
 .logo-text h1 {
@@ -302,20 +302,39 @@ body {
 }
 
 .card-icon {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     background: linear-gradient(135deg, var(--primary-500), var(--accent-purple));
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+    animation: iconPulse 2s ease-in-out infinite;
+    flex-shrink: 0;
 }
 
 .card-icon svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     color: #fff;
+    animation: iconSpin 3s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { 
+        box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2),
+                    0 0 0 0 rgba(99, 102, 241, 0);
+    }
+    50% { 
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3),
+                    0 0 0 6px rgba(99, 102, 241, 0.1);
+    }
+}
+
+@keyframes iconSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .card-header h2 {
@@ -547,8 +566,8 @@ body {
 }
 
 .empty-icon {
-    width: 88px;
-    height: 88px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto var(--space-lg);
     background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
     border: 2px solid var(--primary-200);
@@ -556,12 +575,43 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: emptyIconBounce 2s ease-in-out infinite;
+}
+
+.empty-icon img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    animation: fadeInScale 0.6s ease-out;
 }
 
 .empty-icon svg {
     width: 44px;
     height: 44px;
     color: var(--primary-400);
+    animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes emptyIconBounce {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .empty-state h3 {
@@ -642,28 +692,57 @@ body {
     display: flex;
     align-items: center;
     gap: var(--space-xs);
-    padding: var(--space-sm) var(--space-md);
+    padding: 6px 12px;
     background: var(--primary-50);
-    border: 1px solid var(--primary-200);
+    border: 1.5px solid var(--primary-200);
     border-radius: var(--radius-md);
     color: var(--primary-600);
     font-family: var(--font-sans);
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    animation: slideInUp 0.4s ease-out backwards;
 }
 
 .audio-btn:hover {
     background: var(--primary-500);
     border-color: var(--primary-500);
     color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
 }
 
 .audio-btn:active {
-    transform: scale(0.95);
+    transform: translateY(0);
+}
+
+.audio-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.audio-btn:hover::before {
+    left: 100%;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .word-info {
@@ -984,6 +1063,12 @@ body {
 .back-to-top-btn svg {
     width: 24px;
     height: 24px;
+    animation: bounceArrow 1.5s ease-in-out infinite;
+}
+
+@keyframes bounceArrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
 }
 
 @media (max-width: 640px) {
